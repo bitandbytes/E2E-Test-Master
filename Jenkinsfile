@@ -7,45 +7,25 @@ pipeline {
   }
   stages {
     stage('Smoke Deployment') {
-      agent {
-        node {
-          label 'master'
-        }
-        
-      }
+      agent any
       steps {
         echo 'Smoke Deployment'
       }
     }
     stage('Smoke Test') {
-      agent {
-        node {
-          label 'master'
-        }
-        
-      }
+      agent any
       steps {
         echo 'Smoke Test'
       }
     }
     stage('E2E Master') {
-      agent {
-        node {
-          label 'master'
-        }
-        
-      }
+      agent any
       steps {
         echo 'E2E Master'
       }
     }
     stage('Optimums Plan') {
-      agent {
-        node {
-          label 'master'
-        }
-        
-      }
+      agent any
       steps {
         echo 'Optimums Plan Started'
       }
