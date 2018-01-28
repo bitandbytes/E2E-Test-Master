@@ -58,7 +58,7 @@ pipeline {
         
       }
       steps {
-        powershell(returnStdout: true, script: 'E2E_TEST_EXECUTER')
+        bat 'java -jar -Dfilters=-skip -Dstory=MyStory endtoend-tests-1.0.0.0-SNAPSHOT-ccp-e2etest.jar'
       }
     }
   }
