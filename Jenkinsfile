@@ -144,6 +144,7 @@ echo "System Started"'''
       }
       steps {
         bat(script: 'java -jar -Dfilters=-skip -Dstory=%STORY_LIST% ..\\endtoend-tests-1.0.0.0-SNAPSHOT-ccp-e2etest.jar', returnStdout: true)
+        node(label: 'Windows_FE')
       }
     }
   }
