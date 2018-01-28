@@ -62,4 +62,7 @@ pipeline {
       }
     }
   }
+  environment {
+    THREAD_1_STORIES = 'MyStory'
+  }
 }
