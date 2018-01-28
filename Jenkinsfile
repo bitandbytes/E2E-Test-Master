@@ -71,6 +71,12 @@ pipeline {
       }
     }
     stage('System Startup') {
+      agent {
+        node {
+          label 'ccpd8'
+        }
+        
+      }
       steps {
         sh '''#!/bin/bash
 
