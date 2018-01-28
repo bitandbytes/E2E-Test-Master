@@ -62,7 +62,15 @@ pipeline {
           steps {
             echo 'Thread 1 started'
           }
-          stage('System Startup') {
+        }
+        stage('Thread 2') {
+          steps {
+            echo 'Thread 2 Started'
+          }
+        }
+      }
+    }
+    stage('System Startup') {
       steps {
         sh '''#!/bin/bash
 
@@ -130,14 +138,6 @@ echo "System Started"'''
       }
       steps {
         bat(script: 'java -jar -Dfilters=-skip -Dstory=%STORY_LIST% ..\\endtoend-tests-1.0.0.0-SNAPSHOT-ccp-e2etest.jar', returnStdout: true)
-      }
-    }
-        }
-        stage('Thread 2') {
-          steps {
-            echo 'Thread 2 Started'
-          }
-        }
       }
     }
   }
