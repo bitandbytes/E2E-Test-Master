@@ -58,7 +58,7 @@ pipeline {
         
       }
       steps {
-        bat(returnStdout: true, script: 'TEST_JAR_EXECUTER')
+        powershell(returnStdout: true, script: 'E2E_TEST_EXECUTER')
       }
     }
   }
