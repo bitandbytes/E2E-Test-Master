@@ -58,7 +58,7 @@ pipeline {
         
       }
       steps {
-        bat 'java -jar -Dfilters=-skip -Dstory=MyStory ..\\endtoend-tests-1.0.0.0-SNAPSHOT-ccp-e2etest.jar'
+        bat 'java -jar -Dfilters=-skip -Dstory=%THREAD_1_STORIES% ..\\endtoend-tests-1.0.0.0-SNAPSHOT-ccp-e2etest.jar'
       }
     }
   }
