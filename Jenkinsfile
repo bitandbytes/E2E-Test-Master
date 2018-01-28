@@ -40,6 +40,26 @@ pipeline {
       }
     }
     stage('Optimums Plan') {
+      parallel {
+        stage('Optimums Plan') {
+          agent {
+            node {
+              label 'master'
+            }
+            
+          }
+          steps {
+            echo 'Optimums Plan Started'
+          }
+        }
+        stage('Alpha Plan') {
+          steps {
+            sh 'sleep 30'
+          }
+        }
+      }
+    }
+    stage('Thread 1') {
       agent {
         node {
           label 'master'
@@ -47,35 +67,7 @@ pipeline {
         
       }
       steps {
-        echo 'Optimums Plan Started'
-      }
-    }
-    stage('Thread 1') {
-      parallel {
-        stage('Thread 1') {
-          agent {
-            node {
-              label 'master'
-            }
-            
-          }
-          environment {
-            THREAD_1_STORIES = 'MyStory'
-          }
-          steps {
-            echo 'Thread 1 started'
-          }
-        }
-        stage('Thread 2') {
-          steps {
-            echo 'Thread 2 Started'
-          }
-        }
-        stage('Thread 3') {
-          steps {
-            echo 'Thread 3 Started'
-          }
-        }
+        echo 'Thread 1 started'
       }
     }
     stage('System Startup') {
@@ -142,7 +134,7 @@ echo "System Started"'''
         
       }
       environment {
-        STORY_LIST = ''
+        STORY_LIST = 'MyStory'
       }
       steps {
         bat(script: 'java -jar -Dfilters=-skip -Dstory=%STORY_LIST% ..\\endtoend-tests-1.0.0.0-SNAPSHOT-ccp-e2etest.jar', returnStdout: true)
