@@ -40,14 +40,23 @@ pipeline {
       }
     }
     stage('Optimums Plan') {
-      agent {
-        node {
-          label 'master'
+      parallel {
+        stage('Optimums Plan') {
+          agent {
+            node {
+              label 'master'
+            }
+            
+          }
+          steps {
+            echo 'Optimums Plan Started'
+          }
         }
-        
-      }
-      steps {
-        echo 'Optimums Plan Started'
+        stage('Alpha Plan') {
+          steps {
+            sh 'sleep 30'
+          }
+        }
       }
     }
     stage('E2E Test') {
