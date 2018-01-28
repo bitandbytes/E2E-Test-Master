@@ -40,26 +40,6 @@ pipeline {
       }
     }
     stage('Optimums Plan') {
-      parallel {
-        stage('Optimums Plan') {
-          agent {
-            node {
-              label 'master'
-            }
-            
-          }
-          steps {
-            echo 'Optimums Plan Started'
-          }
-        }
-        stage('Alpha Plan') {
-          steps {
-            sh 'sleep 30'
-          }
-        }
-      }
-    }
-    stage('Thread 1') {
       agent {
         node {
           label 'master'
@@ -67,7 +47,27 @@ pipeline {
         
       }
       steps {
-        echo 'Thread 1 started'
+        echo 'Optimums Plan Started'
+      }
+    }
+    stage('Thread 1') {
+      parallel {
+        stage('Thread 1') {
+          agent {
+            node {
+              label 'master'
+            }
+            
+          }
+          steps {
+            echo 'Thread 1 started'
+          }
+        }
+        stage('Thread 2') {
+          steps {
+            echo 'Thread 2 Started'
+          }
+        }
       }
     }
     stage('System Startup') {
