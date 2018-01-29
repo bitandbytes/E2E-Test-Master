@@ -54,7 +54,8 @@ pipeline {
 
 shopt -s expand_aliases
 source ~/.bashrc
-export BUILD_ID=dontKillMe 
+export BUILD_ID=dontKillMe
+export JENKINS_NODE_COOKIE=do_not_kill
 
 sm 5
 sleep 60
