@@ -23,12 +23,13 @@ sh deploy_ccp_system_v1.sh ccpcit2'''
     stage('Smoke Test') {
       agent {
         node {
-          label 'master'
+          label 'Windows_FE'
         }
         
       }
       steps {
         echo 'Smoke Test'
+        bat(returnStdout: true, script: 'java -jar -Dfilters=-skip -Dtestsuite=ui -Dstory=post_deployment_smoke ..\\endtoend-tests-1.0.0.0-SNAPSHOT-ccp-e2etest.jar')
       }
     }
     stage('Optimums Plan') {
