@@ -9,7 +9,7 @@ pipeline {
     stage('Smoke Deployment') {
       agent {
         node {
-          label 'master'
+          label 'ccpq54'
         }
         
       }
