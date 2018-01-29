@@ -15,6 +15,9 @@ pipeline {
       }
       steps {
         echo 'Smoke Deployment'
+        sh '''#!/bin/bash
+export JENKINS_NODE_COOKIE=do_not_kill
+sh deploy_ccp_system_v1.sh ccpcit2'''
       }
     }
     stage('Smoke Test') {
