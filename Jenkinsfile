@@ -28,17 +28,6 @@ pipeline {
         echo 'Smoke Test'
       }
     }
-    stage('E2E Master') {
-      agent {
-        node {
-          label 'master'
-        }
-        
-      }
-      steps {
-        echo 'E2E Master'
-      }
-    }
     stage('Optimums Plan') {
       agent {
         node {
@@ -48,26 +37,6 @@ pipeline {
       }
       steps {
         echo 'Optimums Plan Started'
-      }
-    }
-    stage('Thread 1') {
-      parallel {
-        stage('Thread 1') {
-          agent {
-            node {
-              label 'master'
-            }
-            
-          }
-          steps {
-            echo 'Thread 1 started'
-          }
-        }
-        stage('Thread 2') {
-          steps {
-            echo 'Thread 2 Started'
-          }
-        }
       }
     }
     stage('System Startup') {
@@ -132,18 +101,44 @@ unset SSHPASS
 echo "System Started"'''
       }
     }
-    stage('E2E Test') {
-      agent {
-        node {
-          label 'Windows_FE'
+    stage('E2E Tests') {
+      parallel {
+        stage('E2E Test') {
+          agent {
+            node {
+              label 'Windows_FE'
+            }
+            
+          }
+          environment {
+            STORY_LIST = 'MyStory'
+          }
+          steps {
+            bat(script: 'java -jar -Dfilters=-skip -Dstory=%STORY_LIST% ..\\endtoend-tests-1.0.0.0-SNAPSHOT-ccp-e2etest.jar', returnStdout: true)
+          }
         }
-        
-      }
-      environment {
-        STORY_LIST = 'MyStory'
-      }
-      steps {
-        bat(script: 'java -jar -Dfilters=-skip -Dstory=%STORY_LIST% ..\\endtoend-tests-1.0.0.0-SNAPSHOT-ccp-e2etest.jar', returnStdout: true)
+        stage('Thread 2') {
+          agent {
+            node {
+              label 'Windows_FE'
+            }
+            
+          }
+          steps {
+            sleep 80
+          }
+        }
+        stage('Thread 3') {
+          agent {
+            node {
+              label 'Windows_FE'
+            }
+            
+          }
+          steps {
+            sleep 60
+          }
+        }
       }
     }
   }
