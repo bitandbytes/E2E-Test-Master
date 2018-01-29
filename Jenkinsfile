@@ -112,6 +112,7 @@ echo "System Started"'''
           }
           environment {
             STORY_LIST = 'MyStory'
+            BUILD_ID = 'dontKillMe'
           }
           steps {
             bat(script: 'java -jar -Dfilters=-skip -Dstory=%STORY_LIST% ..\\endtoend-tests-1.0.0.0-SNAPSHOT-ccp-e2etest.jar', returnStdout: true)
