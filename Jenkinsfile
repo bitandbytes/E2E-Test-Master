@@ -123,7 +123,7 @@ echo "System Started"'''
           }
           steps {
             bat(script: 'java -jar -Dfilters=-skip -Dstory=%STORY_LIST% ..\\endtoend-tests-1.0.0.0-SNAPSHOT-ccp-e2etest.jar', returnStdout: true)
-            archiveArtifacts(fingerprint: true, artifacts: 'target\\jbehave\\*')
+            archiveArtifacts(fingerprint: true, artifacts: 'target\\jbehave\\view*')
           }
         }
         stage('Thread 2') {
