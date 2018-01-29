@@ -103,7 +103,7 @@ echo "System Started"'''
     }
     stage('E2E Tests') {
       parallel {
-        stage('E2E Test') {
+        stage('Thread 1') {
           agent {
             node {
               label 'Windows_FE'
