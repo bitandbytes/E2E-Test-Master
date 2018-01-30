@@ -44,17 +44,19 @@ sh ../deploy_ccp_system_v1.sh ccpcit2'''
       }
     }
     stage('System Startup') {
-      agent {
-        node {
-          label 'ccpd8'
-        }
-        
-      }
-      environment {
-        BUILD_ID = 'dontKillMe'
-      }
-      steps {
-        sh '''#!/bin/bash
+      parallel {
+        stage('System Startup Thread 1') {
+          agent {
+            node {
+              label 'ccpd8'
+            }
+            
+          }
+          environment {
+            BUILD_ID = 'dontKillMe'
+          }
+          steps {
+            sh '''#!/bin/bash
 
 shopt -s expand_aliases
 source ~/.bashrc
@@ -107,6 +109,13 @@ unset SSHPASS
 
 
 echo "System Started"'''
+          }
+        }
+        stage('System Startup Thread 2') {
+          steps {
+            echo 'System Startup Thread 2'
+          }
+        }
       }
     }
     stage('E2E Tests') {
