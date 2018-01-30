@@ -116,6 +116,12 @@ echo "System Started"'''
             echo 'System Startup Thread 2'
           }
         }
+        stage('System Startup Thread 3') {
+          steps {
+            echo 'System Startup Thread 3'
+            sleep 120
+          }
+        }
       }
     }
     stage('E2E Tests') {
